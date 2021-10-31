@@ -1,26 +1,9 @@
-# Two Sum
-#### Given an array of integers ```nums``` and an integer ```target```, return *indices of the two numbers such that they add up to* ```target```.
+## Find the element that appears once in an array where every other element appears twice
 
-You may assume that each input would have **exactly one solution**, and you may not use the same element twice.
+Given an array of integers. All numbers occur twice except one number which occurs once. Find the number in O(n) time & constant extra space.
 
-You can return the answer in any order.
-
-## Examples
+Example : 
 ```
-Input: nums = [2,7,11,15], target = 9
-Output: [0,1]
-Output: Because nums[0] + nums[1] == 9, we return [0, 1].
+Input:  ar[] = {7, 3, 5, 4, 5, 3, 4}
+Output: 7 
 ```
-```
-Input: nums = [3,2,4], target = 6
-Output: [1,2]
-```
-```
-Input: nums = [3,3], target = 6
-Output: [0,1]
-```
-## Contraints
-* 2 <= nums.length <= 10<sup>4</sup>
-* -10<sup>9</sup> <= nums[i] <= 10<sup>9</sup>
-* -10<sup>9</sup> <= target <= 10<sup>9</sup>
-* **Only one valid answer exists.**
