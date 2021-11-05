@@ -1,14 +1,14 @@
-## Count set bits in an integer
-Write an efficient program to count the number of 1s in the binary representation of an integer.
+## Count number of trailing zeros in Binary representation of a number using Bitset
+Given a number. The task is to count the number of Trailing Zero in Binary representation of a number using bitset.
 
 ### Examples :
 
 ```
-Input : n = 6
-Output : 2
-Binary representation of 6 is 110 and has 2 set bits
+Input : N = 16
+Output : 4
+Binary representation of N is 1000. Therefore,
+number of zeroes at the end is 3.
 
-Input : n = 13
+Input : N = 8
 Output : 3
-Binary representation of 13 is 1101 and has 3 set bits
 ```
