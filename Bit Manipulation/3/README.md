@@ -1,26 +1,18 @@
-# Two Sum
-#### Given an array of integers ```nums``` and an integer ```target```, return *indices of the two numbers such that they add up to* ```target```.
+## Find the two non-repeating elements in an array of repeating elements/ Unique Numbers 2
 
-You may assume that each input would have **exactly one solution**, and you may not use the same element twice.
+Given an array in which all numbers except two are repeated once. (i.e. we have 2n+2 numbers and n numbers are occurring twice and remaining two have occurred once). Find those two numbers in the most efficient way.  
 
-You can return the answer in any order.
+### Let us see an example.
+   arr[] = {2, 4, 7, 9, 2, 4}
+1) Get the XOR of all the elements.
+     xor = 2^4^7^9^2^4 = 14 (1110)
+2) Get a number which has only one set bit of the xor.   
+   Since we can easily get the rightmost set bit, let us use it.
+     set_bit_no = xor & ~(xor-1) = (1110) & ~(1101) = 0010
+   Now set_bit_no will have only set as rightmost set bit of xor.
+3) Now divide the elements in two sets and do xor of         
+   elements in each set and we get the non-repeating 
+   elements 7 and 9. Please see the implementation for this step.
 
-## Examples
-```
-Input: nums = [2,7,11,15], target = 9
-Output: [0,1]
-Output: Because nums[0] + nums[1] == 9, we return [0, 1].
-```
-```
-Input: nums = [3,2,4], target = 6
-Output: [1,2]
-```
-```
-Input: nums = [3,3], target = 6
-Output: [0,1]
-```
-## Contraints
-* 2 <= nums.length <= 10<sup>4</sup>
-* -10<sup>9</sup> <= nums[i] <= 10<sup>9</sup>
-* -10<sup>9</sup> <= target <= 10<sup>9</sup>
-* **Only one valid answer exists.**
+### OUTPUT:
+The non-repeating elements are 7 and 9
