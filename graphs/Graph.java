@@ -1,8 +1,8 @@
 package graphs;
-
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
+import java.util.Stack;
 
 public class Graph{
     private LinkedList<Integer> adj[];
@@ -24,51 +24,93 @@ public class Graph{
         int parent[] = new int[adj.length];
         Queue<Integer> q = new LinkedList<>();
         q.add(source);
-        parent[source] = 1;
+        parent[source] = -1;
         vis[source] = true;
+
         while(!q.isEmpty()){
             int cur = q.poll();
             if(cur == destination) break;
 
-            for(int neighbour : adj[cur]){
-                if(!vis[neighbour]){
-                    vis[neighbour] = true;
-                    q.add(neighbour);
-                    parent[neighbour] = cur;
+            for(int neighbor : adj[cur]){
+                if(!vis[neighbor]){
+                    vis[neighbor] = true;
+                    q.add(neighbor);
+                    parent[neighbor] = cur;
                 }
             }
         }
 
         int cur = destination;
         int distance = 0;
-
-        while(parent[cur] != 1){
+        while(parent[cur]!=-1){
             System.out.println(cur + " -> ");
             cur = parent[cur];
             distance++;
         }
-        
+
         return distance;
     }
 
-    public static void main(String args[]){
+    public boolean dfsUtil(int source, int destination, boolean vis[]){
+        if(source == destination) return true;
+
+        for(int neighbor : adj[source]){
+            if(!vis[neighbor]){
+                vis[neighbor] = true;
+                boolean isConnected = dfsUtil(neighbor, destination, vis);
+                if(isConnected) return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean dfsStack(int source, int destination){
+        boolean vis[] = new boolean[adj.length];
+        vis[source] = true;
+        Stack<Integer> stack = new Stack<>();
+        stack.push(source);
+        while(!stack.isEmpty()){
+            int cur = stack.pop();
+            if(cur == destination) return true;
+            for(int neighbor : adj[cur]){
+                if(!vis[neighbor]){
+                    vis[neighbor] = true;
+                    stack.push(neighbor);
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean dfs(int source, int destination){
+        boolean vis[] = new boolean[adj.length];
+        vis[source] = true;
+
+        return dfsUtil(source, destination, vis);
+    }
+
+    public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter number of vertices and edges:");
+        System.out.println("Enter the number of vertices and edges:");
         int v = sc.nextInt();
         int e = sc.nextInt();
         Graph graph = new Graph(v);
-        System.out.println("Enter "+ e + " edges:");
+        System.out.println("Enter "+ e+ " edges");
         for(int i = 0; i < e; i++){
             int source = sc.nextInt();
             int destination = sc.nextInt();
             graph.addEdge(source, destination);
         }
-        System.out.println("Enter source and destination");
-		
-		int source = sc.nextInt();
-		int destination = sc.nextInt();
-		
-		int distance = graph.bfs(source, destination);
-		System.out.print("min distance is " + distance);
+
+        System.out.println(("Enter the source and destination:"));
+        int source = sc.nextInt();
+        int destination = sc.nextInt();
+
+        // int distance = graph.bfs(source, destination);
+        // System.out.println("Minimum distance is:" + distance);
+
+        System.out.println("possible " + graph.dfsStack(source, destination));
+
+        sc.close();
     }
 }
